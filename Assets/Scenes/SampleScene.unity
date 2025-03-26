@@ -672,6 +672,8 @@ GameObject:
   - component: {fileID: 627512658}
   - component: {fileID: 627512661}
   - component: {fileID: 627512660}
+  - component: {fileID: 627512663}
+  - component: {fileID: 627512662}
   m_Layer: 0
   m_Name: Warrior
   m_TagString: Untagged
@@ -821,9 +823,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ebfabb1daf03b4db298f97ab8c099b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 627512659}
   _groundChecker: {fileID: 627512660}
   _mover: {fileID: 627512661}
+  _inputReader: {fileID: 627512662}
+  _characterAnimator: {fileID: 627512663}
 --- !u!95 &627512659
 Animator:
   serializedVersion: 5
@@ -876,6 +879,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 5
   _jumpForce: 14
+--- !u!114 &627512662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627512653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fadbea5d080f84f49bc9fc9b97010c1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &627512663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627512653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccd41f4bd2c622449a97e88bd51197d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &642968433
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,6 +1105,8 @@ GameObject:
   - component: {fileID: 1125823639}
   - component: {fileID: 1125823638}
   - component: {fileID: 1125823637}
+  - component: {fileID: 1125823644}
+  - component: {fileID: 1125823643}
   m_Layer: 0
   m_Name: LightBandit2
   m_TagString: Untagged
@@ -1112,12 +1141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89e36d7d5efb6a3408f5f4b232505d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waitTime: 2
-  _patrolWaypoints:
-  - {fileID: 1525641491}
-  - {fileID: 1846494344}
-  _mover: {fileID: 1125823638}
-  _animator: {fileID: 0}
 --- !u!114 &1125823638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1267,6 +1290,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1125823643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125823635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccd41f4bd2c622449a97e88bd51197d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1125823644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125823635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8755a8abc871454da4d84e17781f6e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _waitTime: 2
+  _patrolWaypoints:
+  - {fileID: 1525641491}
+  - {fileID: 1846494344}
+  _mover: {fileID: 1125823638}
+  _characterAnimator: {fileID: 1125823643}
 --- !u!1 &1157015554
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,8 +1333,10 @@ GameObject:
   - component: {fileID: 1157015559}
   - component: {fileID: 1157015558}
   - component: {fileID: 1157015557}
-  - component: {fileID: 1157015556}
   - component: {fileID: 1157015555}
+  - component: {fileID: 1157015556}
+  - component: {fileID: 1157015562}
+  - component: {fileID: 1157015563}
   m_Layer: 0
   m_Name: LightBandit1
   m_TagString: Untagged
@@ -1301,12 +1356,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89e36d7d5efb6a3408f5f4b232505d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waitTime: 2
-  _patrolWaypoints:
-  - {fileID: 1829478505}
-  - {fileID: 1734452410}
-  _mover: {fileID: 1157015556}
-  _animator: {fileID: 0}
 --- !u!114 &1157015556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1471,6 +1520,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1823635258}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1157015562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157015554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccd41f4bd2c622449a97e88bd51197d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1157015563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157015554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8755a8abc871454da4d84e17781f6e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _waitTime: 2
+  _patrolWaypoints:
+  - {fileID: 1829478505}
+  - {fileID: 1734452410}
+  _mover: {fileID: 1157015556}
+  _characterAnimator: {fileID: 1157015562}
 --- !u!1 &1238821737
 GameObject:
   m_ObjectHideFlags: 0
@@ -6220,6 +6299,8 @@ GameObject:
   - component: {fileID: 2012264349}
   - component: {fileID: 2012264348}
   - component: {fileID: 2012264347}
+  - component: {fileID: 2012264354}
+  - component: {fileID: 2012264353}
   m_Layer: 0
   m_Name: LightBandit3
   m_TagString: Untagged
@@ -6254,12 +6335,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89e36d7d5efb6a3408f5f4b232505d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waitTime: 2
-  _patrolWaypoints:
-  - {fileID: 1462102413}
-  - {fileID: 622583498}
-  _mover: {fileID: 2012264348}
-  _animator: {fileID: 0}
 --- !u!114 &2012264348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6409,6 +6484,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2012264353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012264345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccd41f4bd2c622449a97e88bd51197d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2012264354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012264345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8755a8abc871454da4d84e17781f6e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _waitTime: 2
+  _patrolWaypoints:
+  - {fileID: 1462102413}
+  - {fileID: 622583498}
+  _mover: {fileID: 2012264348}
+  _characterAnimator: {fileID: 2012264353}
 --- !u!1 &2051143927
 GameObject:
   m_ObjectHideFlags: 0

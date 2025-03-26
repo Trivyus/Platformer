@@ -2,35 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Mover), typeof(Animator))]
+[RequireComponent(typeof(Mover), typeof(InputReader), typeof(CharacterAnimator))]
 public class Character : MonoBehaviour
 {
-    [SerializeField] private Animator _animator;
     [SerializeField] private GroundChecker _groundChecker;
     [SerializeField] private Mover _mover;
-
-    private float _moveDirection;
+    [SerializeField] private InputReader _inputReader;
+    [SerializeField] private CharacterAnimator _characterAnimator;
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
+        _inputReader = GetComponent<InputReader>();
+        _characterAnimator = GetComponent<CharacterAnimator>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.TryGetComponent(out Coin coin))
+        {
+            coin.Collect();
+        }
     }
 
     private void Update()
     {
-        _moveDirection = Input.GetAxis("Horizontal");
-        _animator.SetFloat("Speed", Mathf.Abs(_moveDirection));
+        _characterAnimator.UpdateMovement(_inputReader.MoveDirection);
 
-        if (Input.GetButtonDown("Jump") && _groundChecker.IsGrounded)
-        {
+        if (_inputReader.JumpPressed && _groundChecker.IsGrounded)
             _mover.Jump();
-        }
     }
 
     private void FixedUpdate()
     {
-        _mover.Move(_moveDirection);
-
-        _animator.SetBool("IsGrounded", _groundChecker.IsGrounded);
+        _mover.Move(_inputReader.MoveDirection);
+        _characterAnimator.UpdateGrounded(_groundChecker.IsGrounded);
     }
 }

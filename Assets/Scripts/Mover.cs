@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Mover : MonoBehaviour
 {
     [Header("Movement Settings")]
@@ -8,13 +8,13 @@ public class Mover : MonoBehaviour
     [SerializeField] private float _jumpForce = 10f;
 
     private Rigidbody2D _rigidbody;
-    private SpriteRenderer _spriteRenderer;
     private bool _isFacingRight = true;
+    private int _rotationAngleRight = 0;
+    private int _rotationAngleLeft = 180;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void Move(float moveDirection)
@@ -35,6 +35,6 @@ public class Mover : MonoBehaviour
     private void Flip()
     {
         _isFacingRight = !_isFacingRight;
-        _spriteRenderer.flipX = !_isFacingRight;
+        transform.rotation = Quaternion.Euler(0, _isFacingRight ? _rotationAngleRight : _rotationAngleLeft, 0);
     }
 }
