@@ -1,17 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Mover), typeof(CharacterAnimator))]
-public class EnemyPatrolBehavior : MonoBehaviour
+public class Patrol : MonoBehaviour
 {
     [SerializeField] private float _waitTime = 2f;
     [SerializeField] private Transform[] _patrolWaypoints;
-    [SerializeField] private Mover _mover;
-    [SerializeField] private CharacterAnimator _characterAnimator;
+
+    private Mover _mover;
+    private CharacterAnimator _characterAnimator;
 
     private float _stoppingDistance = 1f;
     private int _currentPointIndex = 0;
+    private float _direction;
 
     private Coroutine _patrolCoroutine;
 
@@ -34,6 +34,10 @@ public class EnemyPatrolBehavior : MonoBehaviour
             StopCoroutine(_patrolCoroutine);
             _patrolCoroutine = null;
         }
+
+        _direction = 0;
+        _characterAnimator.UpdateMovement(_direction);
+        _mover.Stop();
     }
 
     private IEnumerator PatrolRoutine()
@@ -52,17 +56,17 @@ public class EnemyPatrolBehavior : MonoBehaviour
 
     private IEnumerator MoveToPoint(Vector3 targetPosition)
     {
-        float direction = Mathf.Sign(targetPosition.x - transform.position.x);
+        _direction = Mathf.Sign(targetPosition.x - transform.position.x);
 
         while ((targetPosition - transform.position).sqrMagnitude > _stoppingDistance * _stoppingDistance)
         {
-            _mover.Move(direction);
-            _characterAnimator.UpdateMovement(direction);
+            _mover.Move(_direction);
+            _characterAnimator.UpdateMovement(_direction);
             yield return null;
         }
 
-        direction = 0f;
-        _characterAnimator.UpdateMovement(direction);
-        _mover.Move(direction);
+        _direction = 0f;
+        _characterAnimator.UpdateMovement(_direction);
+        _mover.Stop();
     }
 }

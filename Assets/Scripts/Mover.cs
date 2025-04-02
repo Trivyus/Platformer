@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(Flipper))]
 public class Mover : MonoBehaviour
 {
     [Header("Movement Settings")]
@@ -8,33 +8,32 @@ public class Mover : MonoBehaviour
     [SerializeField] private float _jumpForce = 10f;
 
     private Rigidbody2D _rigidbody;
+    private Flipper _flipper;
     private bool _isFacingRight = true;
-    private int _rotationAngleRight = 0;
-    private int _rotationAngleLeft = 180;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _flipper = GetComponent<Flipper>();
     }
 
     public void Move(float moveDirection)
     {
         if (moveDirection > 0 && !_isFacingRight)
-            Flip();
+            _flipper.Flip(ref _isFacingRight);
         else if (moveDirection < 0 && _isFacingRight)
-            Flip();
+            _flipper.Flip(ref _isFacingRight);
 
         _rigidbody.velocity = new Vector2(moveDirection * _moveSpeed, _rigidbody.velocity.y);
+    }
+
+    public void Stop()
+    {
+        _rigidbody.velocity = new Vector2(0 * _moveSpeed, _rigidbody.velocity.y);
     }
 
     public void Jump()
     {
         _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpForce);
-    }
-
-    private void Flip()
-    {
-        _isFacingRight = !_isFacingRight;
-        transform.rotation = Quaternion.Euler(0, _isFacingRight ? _rotationAngleRight : _rotationAngleLeft, 0);
     }
 }
