@@ -3,12 +3,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(Flipper))]
 public class Mover : MonoBehaviour
 {
-    [Header("Movement Settings")]
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _jumpForce = 10f;
 
     private Rigidbody2D _rigidbody;
     private Flipper _flipper;
+
     private bool _isFacingRight = true;
 
     private void Awake()

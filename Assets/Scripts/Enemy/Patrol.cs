@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Mover))]
+[RequireComponent(typeof(CharacterAnimator))]
 public class Patrol : MonoBehaviour
 {
     [SerializeField] private float _waitTime = 2f;
@@ -10,10 +12,11 @@ public class Patrol : MonoBehaviour
     private CharacterAnimator _characterAnimator;
 
     private float _stoppingDistance = 1f;
-    private int _currentPointIndex = 0;
     private float _direction;
+    private int _currentPointIndex = 0;
 
     private Coroutine _patrolCoroutine;
+    private Coroutine _movingCoroutine;
 
     private void Awake()
     {
@@ -31,6 +34,7 @@ public class Patrol : MonoBehaviour
     {
         if (_patrolCoroutine != null)
         {
+            StopCoroutine(_movingCoroutine);
             StopCoroutine(_patrolCoroutine);
             _patrolCoroutine = null;
         }
@@ -46,7 +50,7 @@ public class Patrol : MonoBehaviour
 
         while (enabled)
         {
-            yield return StartCoroutine(MoveToPoint(_patrolWaypoints[_currentPointIndex].position));
+            yield return _movingCoroutine = StartCoroutine(MoveToPoint(_patrolWaypoints[_currentPointIndex].position));
 
             yield return wait;
 

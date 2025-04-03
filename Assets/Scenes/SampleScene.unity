@@ -5966,7 +5966,6 @@ MonoBehaviour:
   _mover: {fileID: 2012264348}
   _patrol: {fileID: 2012264359}
   _chasing: {fileID: 2012264354}
-  _enemyCombat: {fileID: 2012264360}
 --- !u!114 &2012264348
 MonoBehaviour:
   m_ObjectHideFlags: 0

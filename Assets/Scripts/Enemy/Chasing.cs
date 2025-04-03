@@ -2,23 +2,32 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(MeleeCombat))]
+[RequireComponent(typeof(Mover))]
+[RequireComponent(typeof(CharacterAnimator))]
+[RequireComponent(typeof(EnemyCombat))]
 public class Chasing : MonoBehaviour
 {
-    private Coroutine _chasingCoroutine;
     private MeleeCombat _meleeCombat;
     private Mover _mover;
     private CharacterAnimator _characterAnimator;
+    private EnemyCombat _enemyCombat;
+    
+    private Character _target;
+    private Coroutine _chasingCoroutine;
+    private Coroutine _movingCoroutine;
 
     private float _attackRange = 2f;
     private float _direction;
 
-    public event Action TargetReached;
+    public event Action TargetLost;
 
     private void Awake()
     {
         _meleeCombat = GetComponent<MeleeCombat>();
         _mover = GetComponent<Mover>();
         _characterAnimator = GetComponent<CharacterAnimator>();
+        _enemyCombat = GetComponent<EnemyCombat>();
 
         if (_meleeCombat != null)
             _attackRange = _meleeCombat.AttackRange;
@@ -26,10 +35,12 @@ public class Chasing : MonoBehaviour
 
     public void StartChasing(Character character)
     {
+        _target = character;
+
         if (_chasingCoroutine != null)
             StopCoroutine(_chasingCoroutine);
 
-        _chasingCoroutine = StartCoroutine(MoveToTarget(character));
+        _chasingCoroutine = StartCoroutine(ChasingRoutine());
     }
 
     public void StopChasing()
@@ -45,20 +56,37 @@ public class Chasing : MonoBehaviour
         _mover.Stop();
     }
 
-    private IEnumerator MoveToTarget(Character character)
+    private IEnumerator ChasingRoutine()
     {
-        while (enabled && (character.transform.position - transform.position).sqrMagnitude > _attackRange * _attackRange)
+        while (enabled)
         {
-            _direction = Mathf.Sign(character.transform.position.x - transform.position.x);
+            if (_movingCoroutine != null)
+                StopCoroutine(_movingCoroutine);
 
+            yield return _movingCoroutine = StartCoroutine(MoveToTarget());
+
+            yield return StartCoroutine(_enemyCombat.AttackCoroutine());
+        }
+    }
+
+    private IEnumerator MoveToTarget()
+    {
+        while (_target != null && (_target.transform.position - transform.position).sqrMagnitude > _attackRange * _attackRange)
+        {
+            _direction = Mathf.Sign(_target.transform.position.x - transform.position.x);
             _mover.Move(_direction);
             _characterAnimator.UpdateMovement(_direction);
-            
+
+            if (_target == null)
+            {
+                TargetLost?.Invoke();
+            }
+
             yield return null;
         }
 
-        TargetReached?.Invoke();
-        StopChasing();
+        _direction = 0;
+        _characterAnimator.UpdateMovement(_direction);
+        _mover.Stop();
     }
-
 }

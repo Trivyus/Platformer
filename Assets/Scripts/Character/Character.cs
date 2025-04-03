@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Mover), typeof(InputReader), typeof(Health))]
+[RequireComponent(typeof(InputReader), typeof(Health))]
 public class Character : MonoBehaviour
 {
     [SerializeField] private GroundChecker _groundChecker;

@@ -9,6 +9,7 @@ public class MeleeCombat : MonoBehaviour
     [SerializeField] private Transform _viewPosition;
 
     private float _lastAttackTime;
+    private float _correctionAccuracy = 1f;
 
     [field: SerializeField] public float AttackDuration { get; private set; } = 3f;
     [field: SerializeField] public float AttackRange { get; private set; } = 2f;
@@ -20,7 +21,7 @@ public class MeleeCombat : MonoBehaviour
             return;
         }
 
-        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, AttackRange, _targetLayer);
+        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, AttackRange + _correctionAccuracy, _targetLayer);
 
         foreach (Collider2D target in targets)
         {

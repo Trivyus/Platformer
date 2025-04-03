@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 [RequireComponent(typeof(Health))]
 public class Enemy : MonoBehaviour
@@ -8,52 +9,41 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Mover _mover;
     [SerializeField] private Patrol _patrol;
     [SerializeField] private Chasing _chasing;
-    [SerializeField] private EnemyCombat _enemyCombat;
 
-    private bool _isChasing = false;
-    private bool _isPatroling = false;
+    private Character _character;
 
     private void OnEnable()
     {
         _checker.PlayerFound += OnTargetFound;
         _checker.PlayerLost += OnTargetLost;
-
-        if (!_isChasing && !_isPatroling)
-        {
-            _patrol.StartPatrol();
-            _isPatroling = true;
-        }
+        _chasing.TargetLost += OnTargetLost;
     }
 
     private void OnDisable()
     {
-        _chasing.TargetReached -= OnReachedTarget;
         _checker.PlayerFound -= OnTargetFound;
         _checker.PlayerLost -= OnTargetLost;
+        _chasing.TargetLost -= OnTargetLost;
         _patrol.StopPatrol();
         _chasing.StopChasing();
+    }
+
+    private void Start()
+    {
+        _patrol.StartPatrol();
     }
 
     private void OnTargetFound(Character character)
     {
+        _character = character;
         _patrol.StopPatrol();
-        _isPatroling = false;
-        _chasing.StartChasing(character);
-        _isChasing = true;
+        _chasing.StartChasing(_character);
     }
 
     private void OnTargetLost()
     {
+        _character = null;
         _chasing.StopChasing();
-        _isChasing = false;
         _patrol.StartPatrol();
-        _isPatroling = true;
-    }
-
-    private void OnReachedTarget()
-    {
-        _isChasing = false;
-        _chasing.TargetReached -= OnReachedTarget;
-        _enemyCombat.MakeAttack();
     }
 }

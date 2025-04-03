@@ -1,14 +1,14 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 [RequireComponent(typeof(MeleeCombat))]
+[RequireComponent(typeof(CharacterAnimator))]
 public class EnemyCombat : MonoBehaviour
 {
     private MeleeCombat _meleeCombat;
     private CharacterAnimator _characterAnimator;
-
-    private bool _isAttacking = false;
 
     private void Awake()
     {
@@ -16,19 +16,9 @@ public class EnemyCombat : MonoBehaviour
         _meleeCombat = GetComponent<MeleeCombat>();
     }
 
-    public void MakeAttack()
-    {
-        if (!_isAttacking)
-        {
-            StartCoroutine(AttackCoroutine());
-        }
-    }
-
-    private IEnumerator AttackCoroutine()
+    public IEnumerator AttackCoroutine()
     {
         WaitForSeconds wait = new(_meleeCombat.AttackDuration);
-
-        _isAttacking = true;
 
         yield return new WaitForSeconds(1f);
 
@@ -36,7 +26,5 @@ public class EnemyCombat : MonoBehaviour
         _meleeCombat.Atack();
 
         yield return wait;
-
-        _isAttacking = false;
     }
 }
