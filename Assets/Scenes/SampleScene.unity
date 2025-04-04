@@ -981,7 +981,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c153fb7fc9e30b249a24f7f3537ae7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterAnimator: {fileID: 627512663}
   _maxHealth: 100
 --- !u!1 &642968433
 GameObject:
@@ -5966,6 +5965,7 @@ MonoBehaviour:
   _mover: {fileID: 2012264348}
   _patrol: {fileID: 2012264359}
   _chasing: {fileID: 2012264354}
+  _characterAnimator: {fileID: 2012264353}
 --- !u!114 &2012264348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6163,7 +6163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c153fb7fc9e30b249a24f7f3537ae7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterAnimator: {fileID: 2012264353}
   _maxHealth: 100
 --- !u!114 &2012264357
 MonoBehaviour:

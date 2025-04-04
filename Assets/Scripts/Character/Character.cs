@@ -18,18 +18,16 @@ public class Character : MonoBehaviour
         _health = GetComponent<Health>();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnEnable()
     {
-        if (other.TryGetComponent(out Coin coin))
-        {
-            coin.Collect();
-        }
+        _health.OnTakeDamage += WhenTakeDamage;
+        _health.OnHealthOver += Die;
+    }
 
-        if (other.TryGetComponent(out HealthPack healthPack))
-        {
-            _health.RecoverHealth(healthPack.HealAmount);
-            healthPack.Collect();
-        }
+    private void OnDisable()
+    {
+        _health.OnTakeDamage -= WhenTakeDamage;
+        _health.OnHealthOver -= Die;
     }
 
     private void Update()
@@ -51,4 +49,25 @@ public class Character : MonoBehaviour
         _mover.Move(_inputReader.MoveDirection);
         _characterAnimator.UpdateGrounded(_groundChecker.IsGrounded);
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.TryGetComponent(out ICollectible collectible))
+        {
+            var healingVisitor = new HealingVisitor(_health);
+
+            collectible.Accept(healingVisitor);
+
+            if (collectible is Coin coin)
+                coin.Collect();
+            else if (collectible is HealthPack healthPack)
+                healthPack.Collect();
+        }
+    }
+
+    private void WhenTakeDamage() =>
+        _characterAnimator.TriggerHurt();
+
+    private void Die() => 
+        Destroy(gameObject);
 }

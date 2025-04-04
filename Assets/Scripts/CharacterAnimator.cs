@@ -5,12 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class CharacterAnimator : MonoBehaviour
 {
-    private static readonly int SpeedHash = Animator.StringToHash("Speed");
-    private static readonly int IsGroundedHash = Animator.StringToHash("IsGrounded");
-    private static readonly int JumpTriggerHash = Animator.StringToHash("JumpTrigger");
-    private static readonly int AtackTrigerHash = Animator.StringToHash("Atack");
-    private static readonly int HurtHash = Animator.StringToHash("Hurt");
-
     private Animator _animator;
 
     private void Awake()
@@ -20,26 +14,26 @@ public class CharacterAnimator : MonoBehaviour
 
     public void UpdateMovement(float speed)
     {
-        _animator.SetFloat(SpeedHash, Mathf.Abs(speed));
+        _animator.SetFloat(AnimatorData.Params.s_speedHash, Mathf.Abs(speed));
     }
 
     public void UpdateGrounded(bool isGrounded)
     {
-        _animator.SetBool(IsGroundedHash, isGrounded);
+        _animator.SetBool(AnimatorData.Params.s_isGroundedHash, isGrounded);
     }
 
     public void TriggerJump()
     {
-        _animator.SetTrigger(JumpTriggerHash);
+        _animator.SetTrigger(AnimatorData.Params.s_jumpTriggerHash);
     }
 
     public void TriggerAtack()
     {
-        _animator.SetTrigger(AtackTrigerHash);
+        _animator.SetTrigger(AnimatorData.Params.s_attackTrigerHash);
     }
 
     public void TriggerHurt()
     {
-        _animator.SetTrigger(HurtHash);
+        _animator.SetTrigger(AnimatorData.Params.s_hurtHash);
     }
 }

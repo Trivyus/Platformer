@@ -1,21 +1,24 @@
+using System;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterAnimator))]
 public class Health : MonoBehaviour
 {
-    [SerializeField] private CharacterAnimator _characterAnimator;
     [SerializeField] private float _maxHealth = 100f;
 
     private float _currentHealth;
+
+    public event Action OnTakeDamage;
+    public event Action OnHealthOver;
 
     private void Awake() => _currentHealth = _maxHealth;
 
     public void TakeDamage(int damage)
     {
         _currentHealth -= damage;
-        _characterAnimator.TriggerHurt();
+        OnTakeDamage?.Invoke();
 
-        if (_currentHealth <= 0) Die();
+        if (_currentHealth <= 0)
+            OnHealthOver?.Invoke();
     }
 
     public void RecoverHealth(float health)
@@ -25,6 +28,4 @@ public class Health : MonoBehaviour
         if (_currentHealth > _maxHealth)
             _currentHealth = _maxHealth;
     }
-
-    private void Die() => Destroy(gameObject);
 }

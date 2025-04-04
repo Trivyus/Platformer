@@ -9,14 +9,23 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Mover _mover;
     [SerializeField] private Patrol _patrol;
     [SerializeField] private Chasing _chasing;
+    [SerializeField] private CharacterAnimator _characterAnimator;
 
     private Character _character;
+    private Health _health;
+
+    private void Awake()
+    {
+        _health = GetComponent<Health>();
+    }
 
     private void OnEnable()
     {
         _checker.PlayerFound += OnTargetFound;
         _checker.PlayerLost += OnTargetLost;
         _chasing.TargetLost += OnTargetLost;
+        _health.OnTakeDamage += WhenTakeDamage;
+        _health.OnHealthOver += Die;
     }
 
     private void OnDisable()
@@ -24,6 +33,8 @@ public class Enemy : MonoBehaviour
         _checker.PlayerFound -= OnTargetFound;
         _checker.PlayerLost -= OnTargetLost;
         _chasing.TargetLost -= OnTargetLost;
+        _health.OnTakeDamage -= WhenTakeDamage;
+        _health.OnHealthOver -= Die;
         _patrol.StopPatrol();
         _chasing.StopChasing();
     }
@@ -46,4 +57,10 @@ public class Enemy : MonoBehaviour
         _chasing.StopChasing();
         _patrol.StartPatrol();
     }
+
+    private void WhenTakeDamage() =>
+        _characterAnimator.TriggerHurt();
+
+    private void Die() =>
+        Destroy(gameObject);
 }

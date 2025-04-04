@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class HealthPack : MonoBehaviour
+public class HealthPack : MonoBehaviour, ICollectible
 {
     [SerializeField] private float _healAmount = 30;
 
@@ -14,5 +14,10 @@ public class HealthPack : MonoBehaviour
     {
         PackCollected?.Invoke(this);
         Destroy(gameObject);
+    }
+
+    public void Accept(ICollectibleVisitor visitor)
+    {
+        visitor.Visit(this);
     }
 }
