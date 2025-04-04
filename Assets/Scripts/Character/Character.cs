@@ -20,24 +20,24 @@ public class Character : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.OnTakeDamage += WhenTakeDamage;
-        _health.OnHealthOver += Die;
+        _health.DamageTaken += ReactDamage;
+        _health.LifeEnded += Die;
     }
 
     private void OnDisable()
     {
-        _health.OnTakeDamage -= WhenTakeDamage;
-        _health.OnHealthOver -= Die;
+        _health.DamageTaken -= ReactDamage;
+        _health.LifeEnded -= Die;
     }
 
     private void Update()
     {
         _characterAnimator.UpdateMovement(_inputReader.MoveDirection);
 
-        if (_inputReader.JumpPressed && _groundChecker.IsGrounded)
+        if (_inputReader.IsJumpPressed && _groundChecker.IsGrounded)
             _mover.Jump();
 
-        if (_inputReader.AtackPressed && _groundChecker.IsGrounded)
+        if (_inputReader.IsAtackPressed && _groundChecker.IsGrounded)
         {
             _characterAnimator.TriggerAtack();
             _meleeCombat.Atack();
@@ -65,7 +65,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void WhenTakeDamage() =>
+    private void ReactDamage() =>
         _characterAnimator.TriggerHurt();
 
     private void Die() => 

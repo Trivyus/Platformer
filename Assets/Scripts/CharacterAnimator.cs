@@ -14,26 +14,26 @@ public class CharacterAnimator : MonoBehaviour
 
     public void UpdateMovement(float speed)
     {
-        _animator.SetFloat(AnimatorData.Params.s_speedHash, Mathf.Abs(speed));
+        _animator.SetFloat(AnimatorData.Params.SpeedHash, Mathf.Abs(speed));
     }
 
     public void UpdateGrounded(bool isGrounded)
     {
-        _animator.SetBool(AnimatorData.Params.s_isGroundedHash, isGrounded);
+        _animator.SetBool(AnimatorData.Params.IsGroundedHash, isGrounded);
     }
 
     public void TriggerJump()
     {
-        _animator.SetTrigger(AnimatorData.Params.s_jumpTriggerHash);
+        _animator.SetTrigger(AnimatorData.Params.JumpTriggerHash);
     }
 
     public void TriggerAtack()
     {
-        _animator.SetTrigger(AnimatorData.Params.s_attackTrigerHash);
+        _animator.SetTrigger(AnimatorData.Params.AttackTrigerHash);
     }
 
     public void TriggerHurt()
     {
-        _animator.SetTrigger(AnimatorData.Params.s_hurtHash);
+        _animator.SetTrigger(AnimatorData.Params.HurtHash);
     }
 }

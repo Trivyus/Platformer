@@ -18,6 +18,6 @@ public class HealingVisitor : ICollectibleVisitor
 
     public void Visit(HealthPack healthPack)
     {
-        _playerHealth.RecoverHealth(healthPack.HealAmount);
+        _playerHealth.Recover(healthPack.HealAmount);
     }
 }

@@ -6,10 +6,10 @@ public static class AnimatorData
 {
     public static class Params
     {
-        public static readonly int s_speedHash = Animator.StringToHash("Speed");
-        public static readonly int s_isGroundedHash = Animator.StringToHash("IsGrounded");
-        public static readonly int s_jumpTriggerHash = Animator.StringToHash("JumpTrigger");
-        public static readonly int s_attackTrigerHash = Animator.StringToHash("Atack");
-        public static readonly int s_hurtHash = Animator.StringToHash("Hurt");
+        public static readonly int SpeedHash = Animator.StringToHash("Speed");
+        public static readonly int IsGroundedHash = Animator.StringToHash("IsGrounded");
+        public static readonly int JumpTriggerHash = Animator.StringToHash("JumpTrigger");
+        public static readonly int AttackTrigerHash = Animator.StringToHash("Atack");
+        public static readonly int HurtHash = Animator.StringToHash("Hurt");
     }
 }

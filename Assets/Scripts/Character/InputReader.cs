@@ -7,13 +7,13 @@ public class InputReader : MonoBehaviour
     public const string AtackButton = "Fire1";
 
     public float MoveDirection { get; private set; }
-    public bool JumpPressed { get; private set; }
-    public bool AtackPressed { get; private set; }
+    public bool IsJumpPressed { get; private set; }
+    public bool IsAtackPressed { get; private set; }
 
     private void Update()
     {
         MoveDirection = Input.GetAxis(HorizontalAxis);
-        JumpPressed = Input.GetButtonDown(JumpButton);
-        AtackPressed = Input.GetButtonDown(AtackButton);
+        IsJumpPressed = Input.GetButtonDown(JumpButton);
+        IsAtackPressed = Input.GetButtonDown(AtackButton);
     }
 }

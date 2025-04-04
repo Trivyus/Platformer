@@ -21,20 +21,20 @@ public class Enemy : MonoBehaviour
 
     private void OnEnable()
     {
-        _checker.PlayerFound += OnTargetFound;
+        _checker.PlayerFounded += OnTargetFound;
         _checker.PlayerLost += OnTargetLost;
         _chasing.TargetLost += OnTargetLost;
-        _health.OnTakeDamage += WhenTakeDamage;
-        _health.OnHealthOver += Die;
+        _health.DamageTaken += WhenTakeDamage;
+        _health.LifeEnded += Die;
     }
 
     private void OnDisable()
     {
-        _checker.PlayerFound -= OnTargetFound;
+        _checker.PlayerFounded -= OnTargetFound;
         _checker.PlayerLost -= OnTargetLost;
         _chasing.TargetLost -= OnTargetLost;
-        _health.OnTakeDamage -= WhenTakeDamage;
-        _health.OnHealthOver -= Die;
+        _health.DamageTaken -= WhenTakeDamage;
+        _health.LifeEnded -= Die;
         _patrol.StopPatrol();
         _chasing.StopChasing();
     }

@@ -10,9 +10,9 @@ public class CharacterChecker : MonoBehaviour
     [SerializeField] private Transform _viewPosition;
     [SerializeField] private LayerMask _targetMask;
 
-    bool _playerFound = false;
+    private bool _isPlayerFounded = false;
 
-    public event Action<Character> PlayerFound;
+    public event Action<Character> PlayerFounded;
     public event Action PlayerLost;
 
     private void Update()
@@ -27,14 +27,14 @@ public class CharacterChecker : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(_viewPosition.position, baseDirection, _viewRadius, _targetMask);
 
-        if (_playerFound == false && hit.collider != null && hit.collider.TryGetComponent(out Character character))
+        if (_isPlayerFounded == false && hit.collider != null && hit.collider.TryGetComponent(out Character character))
         {
-            _playerFound = true;
-            PlayerFound?.Invoke(character);
+            _isPlayerFounded = true;
+            PlayerFounded?.Invoke(character);
         }
-        else if (_playerFound == true && hit.collider == null)
+        else if (_isPlayerFounded == true && hit.collider == null)
         {
-            _playerFound = false;
+            _isPlayerFounded = false;
             PlayerLost?.Invoke();
         }
     }
