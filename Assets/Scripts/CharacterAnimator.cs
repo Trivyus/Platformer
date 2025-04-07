@@ -2,14 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Animator), typeof(Health))]
 public class CharacterAnimator : MonoBehaviour
 {
     private Animator _animator;
+    private Health _health;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _health = GetComponent<Health>();
+    }
+
+    private void OnEnable()
+    {
+        _health.DamageTaken += TriggerHurt;
+    }
+
+    private void OnDisable()
+    {
+        _health.DamageTaken -= TriggerHurt;
     }
 
     public void UpdateMovement(float speed)

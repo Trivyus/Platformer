@@ -14,6 +14,7 @@ public class Patrol : MonoBehaviour
     private float _stoppingDistance = 1f;
     private float _direction;
     private int _currentPointIndex = 0;
+    private WaitForSeconds _wait;
 
     private Coroutine _patrolCoroutine;
     private Coroutine _movingCoroutine;
@@ -22,6 +23,8 @@ public class Patrol : MonoBehaviour
     {
         _mover = GetComponent<Mover>();
         _characterAnimator = GetComponent<CharacterAnimator>();
+
+        _wait = new(_waitTime);
     }
 
     public void StartPatrol()
@@ -46,13 +49,11 @@ public class Patrol : MonoBehaviour
 
     private IEnumerator PatrolRoutine()
     {
-        WaitForSeconds wait = new(_waitTime);
-
         while (enabled)
         {
             yield return _movingCoroutine = StartCoroutine(MoveToPoint(_patrolWaypoints[_currentPointIndex].position));
 
-            yield return wait;
+            yield return _wait;
 
             _currentPointIndex = (_currentPointIndex + 1) % _patrolWaypoints.Length;
         }

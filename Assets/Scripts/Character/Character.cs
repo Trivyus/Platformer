@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(InputReader), typeof(Health))]
@@ -20,28 +18,21 @@ public class Character : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.DamageTaken += ReactDamage;
         _health.LifeEnded += Die;
+        _inputReader.JumpButtonPressed += ActionOnJump;
+        _inputReader.AttackButtonPressed += ActionOnAttack;
     }
 
     private void OnDisable()
     {
-        _health.DamageTaken -= ReactDamage;
         _health.LifeEnded -= Die;
+        _inputReader.JumpButtonPressed -= ActionOnJump;
+        _inputReader.AttackButtonPressed -= ActionOnAttack;
     }
 
     private void Update()
     {
         _characterAnimator.UpdateMovement(_inputReader.MoveDirection);
-
-        if (_inputReader.IsJumpPressed && _groundChecker.IsGrounded)
-            _mover.Jump();
-
-        if (_inputReader.IsAtackPressed && _groundChecker.IsGrounded)
-        {
-            _characterAnimator.TriggerAtack();
-            _meleeCombat.Atack();
-        }
     }
 
     private void FixedUpdate()
@@ -54,20 +45,27 @@ public class Character : MonoBehaviour
     {
         if (other.TryGetComponent(out ICollectible collectible))
         {
-            var healingVisitor = new HealingVisitor(_health);
+            var visitors = new ICollectibleVisitor[] {new HealingVisitor(_health), new ScoreVisitor()};
 
-            collectible.Accept(healingVisitor);
-
-            if (collectible is Coin coin)
-                coin.Collect();
-            else if (collectible is HealthPack healthPack)
-                healthPack.Collect();
+            collectible.Collect(new MultiVisitor(visitors));
         }
     }
 
-    private void ReactDamage() =>
-        _characterAnimator.TriggerHurt();
+    private void ActionOnJump(bool isJumping)
+    {
+        if (isJumping && _groundChecker.IsGrounded)
+            _mover.Jump();
+    }
 
-    private void Die() => 
+    private void ActionOnAttack(bool isAttacking)
+    {
+        if (isAttacking && _groundChecker.IsGrounded)
+        {
+            _characterAnimator.TriggerAtack();
+            _meleeCombat.Atack();
+        }
+    }
+
+    private void Die() =>
         Destroy(gameObject);
 }

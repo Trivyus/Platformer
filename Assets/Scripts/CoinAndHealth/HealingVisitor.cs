@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class HealingVisitor : ICollectibleVisitor
 {
     private Health _playerHealth;
@@ -13,7 +9,6 @@ public class HealingVisitor : ICollectibleVisitor
 
     public void Visit(Coin coin)
     {
-        Debug.Log("Coin collected!");
     }
 
     public void Visit(HealthPack healthPack)

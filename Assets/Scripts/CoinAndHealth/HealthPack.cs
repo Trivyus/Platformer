@@ -5,19 +5,14 @@ using UnityEngine;
 public class HealthPack : MonoBehaviour, ICollectible
 {
     [SerializeField] private float _healAmount = 30;
-
-    public event Action<HealthPack> PackCollected;
-
     public float HealAmount => _healAmount;
 
-    public void Collect()
-    {
-        PackCollected?.Invoke(this);
-        Destroy(gameObject);
-    }
+    public event Action<ICollectible> Collected;
 
-    public void Accept(ICollectibleVisitor visitor)
+    public void Collect(ICollectibleVisitor visitor)
     {
         visitor.Visit(this);
+        Collected?.Invoke(this);
+        Destroy(gameObject);
     }
 }

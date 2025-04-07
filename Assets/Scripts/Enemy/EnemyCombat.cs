@@ -10,21 +10,26 @@ public class EnemyCombat : MonoBehaviour
     private MeleeCombat _meleeCombat;
     private CharacterAnimator _characterAnimator;
 
+    private WaitForSeconds _waitAfterAttack;
+    private WaitForSeconds _waitBeforAttack;
+    private float _delayBeforAttack = 1f;
+
     private void Awake()
     {
         _characterAnimator = GetComponent<CharacterAnimator>();
         _meleeCombat = GetComponent<MeleeCombat>();
+
+        _waitAfterAttack = new(_meleeCombat.AttackDuration);
+        _waitBeforAttack = new (_delayBeforAttack);
     }
 
     public IEnumerator AttackCoroutine()
     {
-        WaitForSeconds wait = new(_meleeCombat.AttackDuration);
-
-        yield return new WaitForSeconds(1f);
+        yield return _waitBeforAttack;
 
         _characterAnimator.TriggerAtack();
         _meleeCombat.Atack();
 
-        yield return wait;
+        yield return _waitAfterAttack;
     }
 }

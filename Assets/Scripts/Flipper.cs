@@ -7,9 +7,9 @@ public class Flipper : MonoBehaviour
     private readonly int _rotationAngleRight = 0;
     private readonly int _rotationAngleLeft = 180;
 
-    public void Flip(ref bool _isFacingRight)
+    public void Flip(ref bool isFacingRight)
     {
-        _isFacingRight = !_isFacingRight;
-        transform.rotation = Quaternion.Euler(0, _isFacingRight ? _rotationAngleRight : _rotationAngleLeft, 0);
+        isFacingRight = !isFacingRight;
+        transform.rotation = Quaternion.Euler(0, isFacingRight ? _rotationAngleRight : _rotationAngleLeft, 0);
     }
 }

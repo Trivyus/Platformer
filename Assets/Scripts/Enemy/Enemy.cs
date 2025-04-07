@@ -24,7 +24,6 @@ public class Enemy : MonoBehaviour
         _checker.PlayerFounded += OnTargetFound;
         _checker.PlayerLost += OnTargetLost;
         _chasing.TargetLost += OnTargetLost;
-        _health.DamageTaken += WhenTakeDamage;
         _health.LifeEnded += Die;
     }
 
@@ -33,7 +32,6 @@ public class Enemy : MonoBehaviour
         _checker.PlayerFounded -= OnTargetFound;
         _checker.PlayerLost -= OnTargetLost;
         _chasing.TargetLost -= OnTargetLost;
-        _health.DamageTaken -= WhenTakeDamage;
         _health.LifeEnded -= Die;
         _patrol.StopPatrol();
         _chasing.StopChasing();
@@ -57,9 +55,6 @@ public class Enemy : MonoBehaviour
         _chasing.StopChasing();
         _patrol.StartPatrol();
     }
-
-    private void WhenTakeDamage() =>
-        _characterAnimator.TriggerHurt();
 
     private void Die() =>
         Destroy(gameObject);

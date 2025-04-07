@@ -1,4 +1,8 @@
+using System;
+
 public interface ICollectible
 {
-    void Accept(ICollectibleVisitor visitor);
+    void Collect(ICollectibleVisitor visitor);
+
+    event Action<ICollectible> Collected;
 }

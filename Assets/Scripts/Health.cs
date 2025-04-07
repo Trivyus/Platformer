@@ -14,8 +14,11 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        _currentValue -= damage;
-        DamageTaken?.Invoke();
+        if (damage > 0)
+        {
+            _currentValue -= damage;
+            DamageTaken?.Invoke();
+        }
 
         if (_currentValue <= 0)
             LifeEnded?.Invoke();
@@ -23,7 +26,8 @@ public class Health : MonoBehaviour
 
     public void Recover(float health)
     {
-        _currentValue += health;
+        if (health > 0)
+            _currentValue += health;
 
         if (_currentValue > _maxValue)
             _currentValue = _maxValue;

@@ -37,7 +37,7 @@ public class PickedUpSpawner : MonoBehaviour
 
         Transform spawnPoint = freePoints[Random.Range(0, freePoints.Length)];
         Coin newCoin = Instantiate(_coinPrefab, spawnPoint.position, Quaternion.identity);
-        newCoin.CoinCollected += OnCoinCollected;
+        newCoin.Collected += OnItemCollected;
 
         _spawnedCoins.Add(newCoin);
     }
@@ -52,7 +52,7 @@ public class PickedUpSpawner : MonoBehaviour
         Transform spawnPoint = freePoints[Random.Range(0, freePoints.Length)];
 
         HealthPack newPack = Instantiate(_healthPackPrefab, spawnPoint.position, Quaternion.identity);
-        newPack.PackCollected += OnPackCollected;
+        newPack.Collected += OnItemCollected;
 
         _spawnedPackes.Add(newPack);
     }
@@ -60,24 +60,30 @@ public class PickedUpSpawner : MonoBehaviour
     private Transform[] GetSpawnPosition()
     {
         var freePoints = _spawnPoints.Where(point => 
-        point != null && !_spawnedCoins.Any(coin => coin != null && coin.transform.position == point.position) &&
-        !_spawnedPackes.Any(pack => pack != null && pack.transform.position == point.position)).ToArray();
+            point != null && 
+            (_spawnedCoins.Any(coin => 
+                coin != null &&
+                coin.transform.position == point.position) == false) &&
+            (_spawnedPackes.Any(pack => 
+                pack != null && 
+                pack.transform.position == point.position)) == false)
+            .ToArray();
 
         return freePoints;
     }
 
-    private void OnCoinCollected(Coin collectedCoin)
+    private void OnItemCollected(ICollectible collectedItem)
     {
-        _spawnedCoins.Remove(collectedCoin);
-
-        collectedCoin.CoinCollected -= OnCoinCollected;
-        SpawnCoin();
-    }
-
-    private void OnPackCollected(HealthPack collectedPack)
-    {
-        _spawnedPackes.Remove(collectedPack);
-
-        collectedPack.PackCollected -= OnPackCollected;
+        if (collectedItem is Coin coin)
+        {
+            coin.Collected -= OnItemCollected;
+            _spawnedCoins.Remove(coin);
+            SpawnCoin();
+        }
+        else if (collectedItem is HealthPack pack)
+        {
+            pack.Collected -= OnItemCollected;
+            _spawnedPackes.Remove(pack);
+        }
     }
 }

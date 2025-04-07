@@ -1,19 +1,38 @@
+using System;
 using UnityEngine;
 
 public class InputReader : MonoBehaviour
 {
-    public const string HorizontalAxis = "Horizontal";
-    public const string JumpButton = "Jump";
-    public const string AtackButton = "Fire1";
+    private const string s_horizontalAxis = "Horizontal";
+    private const string s_jumpButton = "Jump";
+    private const string s_attackButton = "Fire1";
 
     public float MoveDirection { get; private set; }
-    public bool IsJumpPressed { get; private set; }
-    public bool IsAtackPressed { get; private set; }
+
+    public event Action<bool> JumpButtonPressed;
+    public event Action<bool> AttackButtonPressed;
+
+    private bool _wasJumpPressed;
+    private bool _wasAttackPressed;
 
     private void Update()
     {
-        MoveDirection = Input.GetAxis(HorizontalAxis);
-        IsJumpPressed = Input.GetButtonDown(JumpButton);
-        IsAtackPressed = Input.GetButtonDown(AtackButton);
+        MoveDirection = Input.GetAxis(s_horizontalAxis);
+
+        bool isJumpPressed = Input.GetButton(s_jumpButton);
+
+        if (isJumpPressed != _wasJumpPressed)
+        {
+            JumpButtonPressed?.Invoke(isJumpPressed);
+            _wasJumpPressed = isJumpPressed;
+        }
+
+        bool isAttackPressed = Input.GetButton(s_attackButton);
+
+        if (isAttackPressed != _wasAttackPressed)
+        {
+            AttackButtonPressed?.Invoke(isAttackPressed);
+            _wasAttackPressed = isAttackPressed;
+        }
     }
 }
