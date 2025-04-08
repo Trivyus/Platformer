@@ -202,6 +202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 171953455}
+  - component: {fileID: 171953456}
   m_Layer: 0
   m_Name: Point4
   m_TagString: Untagged
@@ -224,6 +225,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 99998123}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &171953456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171953454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3563e2fe9bbc1f14ba4f08816bdb60a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <IsFree>k__BackingField: 1
 --- !u!1 &191654894
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,6 +331,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 220617113}
+  - component: {fileID: 220617114}
   m_Layer: 0
   m_Name: Point3
   m_TagString: Untagged
@@ -339,6 +354,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 99998123}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &220617114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220617112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3563e2fe9bbc1f14ba4f08816bdb60a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <IsFree>k__BackingField: 1
 --- !u!1 &230771690
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,6 +376,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 230771691}
+  - component: {fileID: 230771692}
   m_Layer: 0
   m_Name: Point7
   m_TagString: Untagged
@@ -370,6 +399,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 99998123}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &230771692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230771690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3563e2fe9bbc1f14ba4f08816bdb60a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <IsFree>k__BackingField: 1
 --- !u!1 &466113023
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,6 +421,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 466113024}
+  - component: {fileID: 466113025}
   m_Layer: 0
   m_Name: Point8
   m_TagString: Untagged
@@ -401,6 +444,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 99998123}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &466113025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466113023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3563e2fe9bbc1f14ba4f08816bdb60a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <IsFree>k__BackingField: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,10 +1062,10 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_ContactCaptureLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 127
   m_CallbackLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 127
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -1035,6 +1091,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 642968434}
+  - component: {fileID: 642968435}
   m_Layer: 0
   m_Name: Point6
   m_TagString: Untagged
@@ -1057,6 +1114,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 99998123}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &642968435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642968433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3563e2fe9bbc1f14ba4f08816bdb60a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <IsFree>k__BackingField: 1
 --- !u!1 &982477941
 GameObject:
   m_ObjectHideFlags: 3
@@ -1191,6 +1261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1017000495}
+  - component: {fileID: 1017000496}
   m_Layer: 0
   m_Name: Point2
   m_TagString: Untagged
@@ -1213,6 +1284,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 99998123}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1017000496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017000494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3563e2fe9bbc1f14ba4f08816bdb60a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <IsFree>k__BackingField: 1
 --- !u!1 &1238821737
 GameObject:
   m_ObjectHideFlags: 0
@@ -4839,6 +4923,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1403070733}
+  - component: {fileID: 1403070734}
   m_Layer: 0
   m_Name: Point5
   m_TagString: Untagged
@@ -4861,6 +4946,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 99998123}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1403070734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403070732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3563e2fe9bbc1f14ba4f08816bdb60a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <IsFree>k__BackingField: 1
 --- !u!1 &1418088905
 GameObject:
   m_ObjectHideFlags: 0
@@ -5520,6 +5618,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1714259449}
+  - component: {fileID: 1714259450}
   m_Layer: 0
   m_Name: Point1
   m_TagString: Untagged
@@ -5542,6 +5641,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 99998123}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1714259450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714259448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3563e2fe9bbc1f14ba4f08816bdb60a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <IsFree>k__BackingField: 1
 --- !u!1 &1734452409
 GameObject:
   m_ObjectHideFlags: 0
@@ -5794,40 +5906,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1881982588}
-  - component: {fileID: 1881982587}
+  - component: {fileID: 1881982590}
+  - component: {fileID: 1881982589}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: Spawners
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1881982587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1881982586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f29ef375638e024c89cd96adf7c9f97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _coinPrefab: {fileID: -3729910617830602937, guid: 49e6ee33250214a9facc214f3a2fecb7, type: 3}
-  _healthPackPrefab: {fileID: 1514942139886476604, guid: 01311b72cfde7114b9a3c9cabdc4ae39, type: 3}
-  _spawnPoints:
-  - {fileID: 1714259449}
-  - {fileID: 1017000495}
-  - {fileID: 220617113}
-  - {fileID: 171953455}
-  - {fileID: 1403070733}
-  - {fileID: 642968434}
-  - {fileID: 230771691}
-  - {fileID: 466113024}
-  - {fileID: 2051143928}
-  _maxCoins: 3
-  _maxPackes: 2
 --- !u!4 &1881982588
 Transform:
   m_ObjectHideFlags: 0
@@ -5844,6 +5931,54 @@ Transform:
   - {fileID: 99998123}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1881982589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881982586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6466c6a90c8a2a0469b8c3269eb55eea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnPoints:
+  - {fileID: 1714259450}
+  - {fileID: 1017000496}
+  - {fileID: 220617114}
+  - {fileID: 171953456}
+  - {fileID: 1403070734}
+  - {fileID: 642968435}
+  - {fileID: 230771692}
+  - {fileID: 466113025}
+  - {fileID: 2051143929}
+  _healthPackPrefab: {fileID: 1514942139886476604, guid: 01311b72cfde7114b9a3c9cabdc4ae39, type: 3}
+  _maxPackes: 2
+--- !u!114 &1881982590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881982586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d59c62b8276f74f41b04fd97f78af254, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnPoints:
+  - {fileID: 1714259450}
+  - {fileID: 1017000496}
+  - {fileID: 220617114}
+  - {fileID: 171953456}
+  - {fileID: 1403070734}
+  - {fileID: 642968435}
+  - {fileID: 230771692}
+  - {fileID: 466113025}
+  - {fileID: 2051143929}
+  _coinPrefab: {fileID: -3729910617830602937, guid: 49e6ee33250214a9facc214f3a2fecb7, type: 3}
+  _maxCoins: 3
 --- !u!1 &1942503436
 GameObject:
   m_ObjectHideFlags: 0
@@ -6251,6 +6386,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2051143928}
+  - component: {fileID: 2051143929}
   m_Layer: 0
   m_Name: Point9
   m_TagString: Untagged
@@ -6273,6 +6409,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 99998123}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2051143929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051143927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3563e2fe9bbc1f14ba4f08816bdb60a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <IsFree>k__BackingField: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

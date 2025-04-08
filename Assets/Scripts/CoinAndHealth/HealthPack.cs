@@ -2,16 +2,15 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class HealthPack : MonoBehaviour, ICollectible
+public class HealthPack : Item
 {
     [SerializeField] private float _healAmount = 30;
     public float HealAmount => _healAmount;
 
-    public event Action<ICollectible> Collected;
+    public event Action<HealthPack> Collected;
 
-    public void Collect(ICollectibleVisitor visitor)
+    public void Collect()
     {
-        visitor.Visit(this);
         Collected?.Invoke(this);
         Destroy(gameObject);
     }

@@ -55,7 +55,7 @@ public class Patrol : MonoBehaviour
 
             yield return _wait;
 
-            _currentPointIndex = (_currentPointIndex + 1) % _patrolWaypoints.Length;
+            _currentPointIndex = ++_currentPointIndex % _patrolWaypoints.Length;
         }
     }
 

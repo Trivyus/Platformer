@@ -65,7 +65,7 @@ public class Chasing : MonoBehaviour
 
             yield return _movingCoroutine = StartCoroutine(MoveToTarget());
 
-            yield return StartCoroutine(_enemyCombat.AttackCoroutine());
+            yield return _enemyCombat.AttackCoroutine();
         }
     }
 

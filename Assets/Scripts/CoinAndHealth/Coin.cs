@@ -2,13 +2,12 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class Coin : MonoBehaviour, ICollectible
+public class Coin : Item
 {
-    public event Action<ICollectible> Collected;
+    public event Action<Coin> Collected;
 
-    public void Collect(ICollectibleVisitor visitor)
+    public void Collect()
     {
-        visitor.Visit(this);
         Collected?.Invoke(this);
         Destroy(gameObject);
     }

@@ -10,6 +10,7 @@ public class Character : MonoBehaviour
     [SerializeField] private MeleeCombat _meleeCombat;
 
     private Health _health;
+    private bool _isJumping;
 
     private void Awake()
     {
@@ -39,22 +40,32 @@ public class Character : MonoBehaviour
     {
         _mover.Move(_inputReader.MoveDirection);
         _characterAnimator.UpdateGrounded(_groundChecker.IsGrounded);
+
+        if (_isJumping)
+        {
+            _mover.Jump();
+            _isJumping = false;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out ICollectible collectible))
+        if (other.TryGetComponent(out Coin coin))
         {
-            var visitors = new ICollectibleVisitor[] {new HealingVisitor(_health), new ScoreVisitor()};
+            coin.Collect();
+        }
 
-            collectible.Collect(new MultiVisitor(visitors));
+        if (other.TryGetComponent(out HealthPack healthPack))
+        {
+            _health.Recover(healthPack.HealAmount);
+            healthPack.Collect();
         }
     }
 
     private void ActionOnJump(bool isJumping)
     {
-        if (isJumping && _groundChecker.IsGrounded)
-            _mover.Jump();
+        if (_groundChecker.IsGrounded)
+            _isJumping = isJumping;
     }
 
     private void ActionOnAttack(bool isAttacking)
@@ -62,7 +73,7 @@ public class Character : MonoBehaviour
         if (isAttacking && _groundChecker.IsGrounded)
         {
             _characterAnimator.TriggerAtack();
-            _meleeCombat.Atack();
+            _meleeCombat.Attack();
         }
     }
 

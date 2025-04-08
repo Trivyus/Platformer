@@ -1,15 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Flipper : MonoBehaviour
 {
-    private readonly int _rotationAngleRight = 0;
-    private readonly int _rotationAngleLeft = 180;
+    private Quaternion _rotationRight;
+    private Quaternion _rotationLeft;
+
+    private void Awake()
+    {
+        _rotationRight = Quaternion.Euler(0, 0, 0);
+        _rotationLeft = Quaternion.Euler(0, 180, 0);
+    }
 
     public void Flip(ref bool isFacingRight)
     {
         isFacingRight = !isFacingRight;
-        transform.rotation = Quaternion.Euler(0, isFacingRight ? _rotationAngleRight : _rotationAngleLeft, 0);
+        transform.rotation = isFacingRight ? _rotationRight : _rotationLeft;
     }
 }

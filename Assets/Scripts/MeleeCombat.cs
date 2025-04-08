@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -22,22 +23,22 @@ public class MeleeCombat : MonoBehaviour
         _hitBuffer = new Collider2D[_maxTargets];
     }
 
-    public void Atack()
+    public void Attack()
     {
         if (Time.time - _lastAttackTime < AttackDuration)
         {
             return;
         }
 
-        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, AttackRange + _correctionAccuracy, _targetLayer);
-
         int hitCount = Physics2D.OverlapCircleNonAlloc(transform.position, AttackRange + _correctionAccuracy, _hitBuffer, _targetLayer);
+        HashSet<Health> damagedTargets = new HashSet<Health>();
 
         for (int i = 0; i < hitCount; i++)
         {
-            if (_hitBuffer[i].TryGetComponent(out Health health))
+            if (_hitBuffer[i].TryGetComponent(out Health health) && !damagedTargets.Contains(health))
             {
                 health.TakeDamage(_damage);
+                damagedTargets.Add(health);
             }
         }
 

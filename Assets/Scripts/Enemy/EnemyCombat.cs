@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 [RequireComponent(typeof(MeleeCombat))]
 [RequireComponent(typeof(CharacterAnimator))]
@@ -28,7 +26,7 @@ public class EnemyCombat : MonoBehaviour
         yield return _waitBeforAttack;
 
         _characterAnimator.TriggerAtack();
-        _meleeCombat.Atack();
+        _meleeCombat.Attack();
 
         yield return _waitAfterAttack;
     }
