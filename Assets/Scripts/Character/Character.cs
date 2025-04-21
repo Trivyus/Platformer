@@ -19,14 +19,14 @@ public class Character : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.LifeEnded += Die;
+        _health.ValueEnded += Die;
         _inputReader.JumpButtonPressed += ActionOnJump;
         _inputReader.AttackButtonPressed += ActionOnAttack;
     }
 
     private void OnDisable()
     {
-        _health.LifeEnded -= Die;
+        _health.ValueEnded -= Die;
         _inputReader.JumpButtonPressed -= ActionOnJump;
         _inputReader.AttackButtonPressed -= ActionOnAttack;
     }

@@ -9,12 +9,13 @@ public class Health : MonoBehaviour
 
     public event Action DamageTaken;
     public event Action Recovered;
-    public event Action LifeEnded;
+    public event Action ValueEnded;
 
     public float CurrentValue => _currentValue;
     public float MaxValue => _maxValue;
 
-    private void Awake() => _currentValue = _maxValue;
+    private void Awake() =>
+        _currentValue = _maxValue;
 
     public void TakeDamage(float damage)
     {
@@ -22,7 +23,7 @@ public class Health : MonoBehaviour
         DamageTaken?.Invoke();
 
         if (_currentValue <= 0)
-            LifeEnded?.Invoke();
+            ValueEnded?.Invoke();
     }
 
     public void Recover(float health)

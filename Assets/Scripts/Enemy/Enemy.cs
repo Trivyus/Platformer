@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
         _checker.PlayerFounded += OnTargetFound;
         _checker.PlayerLost += OnTargetLost;
         _chasing.TargetLost += OnTargetLost;
-        _health.LifeEnded += Die;
+        _health.ValueEnded += Die;
     }
 
     private void OnDisable()
@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
         _checker.PlayerFounded -= OnTargetFound;
         _checker.PlayerLost -= OnTargetLost;
         _chasing.TargetLost -= OnTargetLost;
-        _health.LifeEnded -= Die;
+        _health.ValueEnded -= Die;
         _patrol.StopPatrol();
         _chasing.StopChasing();
     }

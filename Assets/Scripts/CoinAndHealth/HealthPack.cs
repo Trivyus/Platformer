@@ -5,9 +5,10 @@ using UnityEngine;
 public class HealthPack : Item
 {
     [SerializeField] private float _healAmount = 30;
-    public float HealAmount => _healAmount;
 
     public event Action<HealthPack> Collected;
+
+    public float HealAmount => _healAmount;
 
     public void Collect()
     {

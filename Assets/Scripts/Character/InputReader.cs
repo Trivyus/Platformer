@@ -3,23 +3,23 @@ using UnityEngine;
 
 public class InputReader : MonoBehaviour
 {
-    private const string s_horizontalAxis = "Horizontal";
-    private const string s_jumpButton = "Jump";
-    private const string s_attackButton = "Fire1";
-
-    public float MoveDirection { get; private set; }
-
-    public event Action<bool> JumpButtonPressed;
-    public event Action<bool> AttackButtonPressed;
+    private const string HorizontalAxis = "Horizontal";
+    private const string JumpButton = "Jump";
+    private const string AttackButton = "Fire1";
 
     private bool _wasJumpPressed;
     private bool _wasAttackPressed;
 
+    public event Action<bool> JumpButtonPressed;
+    public event Action<bool> AttackButtonPressed;
+
+    public float MoveDirection { get; private set; }
+
     private void Update()
     {
-        MoveDirection = Input.GetAxis(s_horizontalAxis);
+        MoveDirection = Input.GetAxis(HorizontalAxis);
 
-        bool isJumpPressed = Input.GetButton(s_jumpButton);
+        bool isJumpPressed = Input.GetButton(JumpButton);
 
         if (isJumpPressed != _wasJumpPressed)
         {
@@ -27,7 +27,7 @@ public class InputReader : MonoBehaviour
             _wasJumpPressed = isJumpPressed;
         }
 
-        bool isAttackPressed = Input.GetButton(s_attackButton);
+        bool isAttackPressed = Input.GetButton(AttackButton);
 
         if (isAttackPressed != _wasAttackPressed)
         {
