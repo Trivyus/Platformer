@@ -82,7 +82,7 @@ public class Character : MonoBehaviour
 
     private void ActionOnAbilityActive()
     {
-        _vampirism.ActivateVampirism();
+        _vampirism.Activate();
     }
 
     private void Die() =>

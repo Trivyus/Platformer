@@ -13,13 +13,13 @@ public class CooldownVisualizer : MonoBehaviour
     private void OnEnable()
     {
         _vampirism.AbilityStarted += StartAbility;
-        _vampirism.AbilityOnCooldawn += StartCooldown;
+        _vampirism.AbilityStartedRecharge += StartCooldown;
     }
 
     private void OnDisable()
     {
         _vampirism.AbilityStarted -= StartAbility;
-        _vampirism.AbilityOnCooldawn -= StartCooldown;
+        _vampirism.AbilityStartedRecharge -= StartCooldown;
     }
 
     public void StartAbility(float duration)

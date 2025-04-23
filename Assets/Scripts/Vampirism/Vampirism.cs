@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Vampirism : MonoBehaviour
 {
+    private const int MaxEnemies = 10;
+
     [SerializeField] private float _healthPerSecond = 1;
     [SerializeField] private float _range = 5f;
     [SerializeField] private float _abilityDuration = 6f;
@@ -18,10 +20,17 @@ public class Vampirism : MonoBehaviour
     private bool _isAbilityActive = false;
     private bool _isOnCooldown = false;
 
-    public event Action<float> AbilityStarted;
-    public event Action<float> AbilityOnCooldawn;
+    private Collider2D[] _hitColliders;
 
-    public void ActivateVampirism()
+    public event Action<float> AbilityStarted;
+    public event Action<float> AbilityStartedRecharge;
+
+    private void Awake()
+    {
+        _hitColliders = new Collider2D[MaxEnemies];
+    }
+
+    public void Activate()
     {
         if (!_isAbilityActive && !_isOnCooldown)
         {
@@ -29,11 +38,11 @@ public class Vampirism : MonoBehaviour
             _radiusUI.UpdateView(_range);
             _radiusUI.ShowRadius();
             AbilityStarted?.Invoke(_abilityDuration);
-            StartCoroutine(VampirismRoutine());
+            StartCoroutine(StartPumpingProcess());
         }
     }
 
-    private IEnumerator VampirismRoutine()
+    private IEnumerator StartPumpingProcess()
     {
         float timer = 0f;
 
@@ -54,14 +63,12 @@ public class Vampirism : MonoBehaviour
             yield return null;
         }
 
-        DeactivateVampirism();
+        Deactivate();
     }
 
     private Health FindClosestEnemy()
     {
-        const int maxEnemies = 10;
-        Collider2D[] hitColliders = new Collider2D[maxEnemies];
-        int numEnemies = Physics2D.OverlapCircleNonAlloc(transform.position, _range, hitColliders, _targetLayer);
+        int numEnemies = Physics2D.OverlapCircleNonAlloc(transform.position, _range, _hitColliders, _targetLayer);
 
         Vector2 playerPos = transform.position;
         Health closestEnemy = null;
@@ -71,16 +78,16 @@ public class Vampirism : MonoBehaviour
 
         for (int i = 0; i < numEnemies; i++)
         {
-            GameObject enemyRoot = hitColliders[i].transform.root.gameObject;
+            GameObject enemyRoot = _hitColliders[i].transform.root.gameObject;
 
             if (processedEnemies.Contains(enemyRoot))
                 continue;
 
             processedEnemies.Add(enemyRoot);
 
-            float sqrDistance = (playerPos - (Vector2)hitColliders[i].transform.position).sqrMagnitude;
+            float sqrDistance = (playerPos - (Vector2)_hitColliders[i].transform.position).sqrMagnitude;
 
-            if (sqrDistance < closestSqrDistance && hitColliders[i].TryGetComponent<Health>(out var enemyHealth))
+            if (sqrDistance < closestSqrDistance && _hitColliders[i].TryGetComponent<Health>(out var enemyHealth))
             {
                 closestSqrDistance = sqrDistance;
                 closestEnemy = enemyHealth;
@@ -90,17 +97,17 @@ public class Vampirism : MonoBehaviour
         return closestEnemy;
     }
 
-    private void DeactivateVampirism()
+    private void Deactivate()
     {
         _isAbilityActive = false;
         _radiusUI.HideRadius();
-        StartCoroutine(CooldownRoutine());
+        StartCoroutine(StartCooldown());
     }
 
-    private IEnumerator CooldownRoutine()
+    private IEnumerator StartCooldown()
     {
         _isOnCooldown = true;
-        AbilityOnCooldawn?.Invoke(_cooldown);
+        AbilityStartedRecharge?.Invoke(_cooldown);
         yield return new WaitForSeconds(_cooldown);
         _isOnCooldown = false;
     }
