@@ -19,6 +19,9 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if(damage <= 0) 
+            return;
+
         _currentValue = Mathf.Clamp(_currentValue - damage, 0, _maxValue);
         DamageTaken?.Invoke();
 
@@ -28,6 +31,9 @@ public class Health : MonoBehaviour
 
     public void Recover(float health)
     {
+        if (health <= 0)
+            return;
+
         _currentValue = Mathf.Clamp(_currentValue + health, 0, _maxValue);
         Recovered?.Invoke();
     }

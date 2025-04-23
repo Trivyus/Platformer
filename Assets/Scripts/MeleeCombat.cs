@@ -7,7 +7,6 @@ public class MeleeCombat : MonoBehaviour
 
     [SerializeField] private int _damage = 35;
     [SerializeField] private LayerMask _targetLayer;
-    [SerializeField] private Transform _viewPosition;
 
     private float _lastAttackTime;
     private float _correctionAccuracy = 1f;
@@ -25,21 +24,14 @@ public class MeleeCombat : MonoBehaviour
     public void Attack()
     {
         if (Time.time - _lastAttackTime < AttackDuration)
-        {
             return;
-        }
 
         int hitCount = Physics2D.OverlapCircleNonAlloc(transform.position, AttackRange + _correctionAccuracy, _hitBuffer, _targetLayer);
-        HashSet<Health> damagedTargets = new HashSet<Health>();
+        HashSet<Health> damagedTargets = new();
 
         for (int i = 0; i < hitCount; i++)
-        {
-            if (_hitBuffer[i].TryGetComponent(out Health health) && !damagedTargets.Contains(health))
-            {
+            if (_hitBuffer[i].TryGetComponent(out Health health) && damagedTargets.Add(health))
                 health.TakeDamage(_damage);
-                damagedTargets.Add(health);
-            }
-        }
 
         _lastAttackTime = Time.time;
     }

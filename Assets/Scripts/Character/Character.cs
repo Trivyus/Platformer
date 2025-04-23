@@ -8,6 +8,7 @@ public class Character : MonoBehaviour
     [SerializeField] private InputReader _inputReader;
     [SerializeField] private CharacterAnimator _characterAnimator;
     [SerializeField] private MeleeCombat _meleeCombat;
+    [SerializeField] private Vampirism _vampirism;
 
     private Health _health;
     private bool _isJumping;
@@ -22,6 +23,7 @@ public class Character : MonoBehaviour
         _health.ValueEnded += Die;
         _inputReader.JumpButtonPressed += ActionOnJump;
         _inputReader.AttackButtonPressed += ActionOnAttack;
+        _inputReader.AbilityButtonPressed += ActionOnAbilityActive;
     }
 
     private void OnDisable()
@@ -29,6 +31,7 @@ public class Character : MonoBehaviour
         _health.ValueEnded -= Die;
         _inputReader.JumpButtonPressed -= ActionOnJump;
         _inputReader.AttackButtonPressed -= ActionOnAttack;
+        _inputReader.AbilityButtonPressed -= ActionOnAbilityActive;
     }
 
     private void Update()
@@ -75,6 +78,11 @@ public class Character : MonoBehaviour
             _characterAnimator.TriggerAtack();
             _meleeCombat.Attack();
         }
+    }
+
+    private void ActionOnAbilityActive()
+    {
+        _vampirism.ActivateVampirism();
     }
 
     private void Die() =>
